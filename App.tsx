@@ -7,17 +7,21 @@ import AccountVerifyScreen from "./src/components/screen/AccountVerifyScreen";
 import SigningScreen from "./src/components/screen/SigningScreen";
 import TwoFactorAuthenticationScreen from "./src/components/screen/TwoFactorAuthentication";
 import ConfirmScreen from "./src/components/screen/ConfirmScreen";
+import React from "react";
+import { Provider } from "react-redux";
+import { store } from "./src/redux/store";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <>
-      <NavigationContainer>
+
+<Provider store={store}>
+<NavigationContainer>
         <Stack.Navigator
           initialRouteName="Splash"
-          screenOptions={{ headerShown: false }}
-        >
+          screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Splash" component={SplashScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="AccountVerify" component={AccountVerifyScreen} />
@@ -27,6 +31,8 @@ export default function App() {
 
         </Stack.Navigator>
       </NavigationContainer>
+    </Provider>
+     
     </>
   );
 }

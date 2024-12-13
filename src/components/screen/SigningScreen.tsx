@@ -8,25 +8,29 @@ import {
   Alert,
 } from "react-native";
 import CustomTextInput from "../customTextInput/CustomTextInput";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Button from "../button/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^.{6,}$/;
 
 const SigningScreen: React.FC = () => {
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isText, setText] = useState("");
-
+  const [email, setEmail] = useState("");
+  const storedEmail = useSelector((state: RootState) => state.auth.email);
+  const storedPassword = useSelector((state: RootState) => state.auth.password);
   const navigation = useNavigation();
 
-  const verifyHandler = () => {
-    if (emailRegex.test(email) && passwordRegex.test(password)) {
-      Alert.alert("Successfull");
-      //navigation.navigate("NextScreen", { email });
+
+  const handleLogin = () => {
+    if (emailRegex.test(email) && passwordRegex.test(password) && (email === storedEmail && password === storedPassword)) {
+      console.log("TwoFactorAuthentication", email, password);
+      navigation.navigate("TwoFactorAuthentication");
+      Alert.alert("Authentication successful!");
     } else {
-      Alert.alert("Invalid Input", "Please enter valid email and password");
+      alert("Invalid credentials.");
     }
   };
 
@@ -97,7 +101,7 @@ const SigningScreen: React.FC = () => {
       <Button
         style={styles.button}
         title="Continue"
-        onPress={() => verifyHandler()}
+        onPress={() => handleLogin()}
       />
       <View
         style={{

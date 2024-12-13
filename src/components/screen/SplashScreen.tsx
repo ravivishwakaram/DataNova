@@ -7,7 +7,7 @@ const SplashScreen: React.FC = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate("ConfirmScreen");
+      navigation.navigate("Login");
     }, 2000);
     return () => clearTimeout(timer);
   }, []);

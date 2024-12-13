@@ -1,28 +1,33 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, Image, TouchableOpacity, Alert } from "react-native";
+import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import CustomTextInput from "../customTextInput/CustomTextInput";
 import { useNavigation } from "@react-navigation/native";
 import Button from "../button/Button";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const AccountVerifyScreen: React.FC = () => {
   const [email, setEmail] = useState("");
+  const storedEmail = useSelector((state: RootState) => state.auth.email);
   const navigation = useNavigation();
 
   const verifyHandler = () => {
-    if (emailRegex.test(email)) {
-      Alert.alert("Successfull");
-
-      navigation.navigate("Signing", { email });
+    if (emailRegex.test(email) && email === storedEmail) {
+      console.log("validEmail", email);
+      navigation.navigate("Signing");
     } else {
-      Alert.alert("Invalid Input", "Please enter valid email and password");
+      alert("Email does not match.");
     }
   };
 
   return (
     <View style={{ flex: 1, marginHorizontal: 36 }}>
-      <TouchableOpacity style={{ marginTop: 96, marginBottom: 36 }}onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        style={{ marginTop: 96, marginBottom: 36 }}
+        onPress={() => navigation.goBack()}
+      >
         <Image
           resizeMode="contain"
           width={100}
@@ -44,10 +49,15 @@ const AccountVerifyScreen: React.FC = () => {
           onChangeText={setEmail}
           regex={emailRegex}
           errorMessage="Invalid email address"
+          keyboardType="email-address"
           leftIcon={require("../../../assets/mail.png")} // Replace with your local icon
         />
       </View>
-      <Button   style={styles.button} title="Verify" onPress={()=> verifyHandler()}/>
+      <Button
+        style={styles.button}
+        title="Verify"
+        onPress={() => verifyHandler()}
+      />
     </View>
   );
 };
@@ -95,7 +105,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     display: "flex",
     alignItems: "center",
-    marginBottom:8
+    marginBottom: 8,
   },
   enterYourEmail: {
     fontSize: 16,
