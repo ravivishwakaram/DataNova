@@ -119,9 +119,6 @@ const TwoFactorAuthenticationScreen: React.FC = () => {
         <Text style={styles.resend}> {"Resend "}</Text>
       </TouchableOpacity> 
       </View>
-
-      
-      <Text style={styles.didNotReceive}>{values}</Text>
  
       <Button style={styles.button} title="Continue" onPress={() => ""} />
     </View>
@@ -130,12 +127,12 @@ const TwoFactorAuthenticationScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#f5f5f5",
-    marginVertical:36
+    marginTop:36,
+  
+
   },
   inputContainer: {
     flexDirection: "row",
-    justifyContent: "space-between",
   },
   input: {
     borderWidth: 1,
@@ -179,7 +176,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     flexDirection: "row",
-    marginBottom: 24,
+    marginVertical:36
   },
 
   twoFactorAuthentication: {
@@ -193,7 +190,6 @@ const styles = StyleSheet.create({
     textAlign: "left",
     display: "flex",
     alignItems: "center",
-    height: 32,
   },
 
   enterThe6: {
@@ -206,7 +202,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     display: "flex",
     alignItems: "center",
-    height: 52,
+    marginTop:6
   },
 
   button: {
@@ -215,7 +211,6 @@ const styles = StyleSheet.create({
       height: 2,
     },
     shadowColor: "rgba(16, 24, 40, 0.06)",
-    marginTop: 36,
     shadowRadius: 6,
     elevation: 6,
     shadowOpacity: 1,
