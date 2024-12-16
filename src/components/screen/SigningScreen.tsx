@@ -62,6 +62,7 @@ const SigningScreen: React.FC = () => {
           leftIcon={require("../../../assets/mail.png")} // Replace with your local icon
           RightCloseIcon={""}
           RightOpenIcon={""}
+          keyboardType="email-address"
         />
       </View>
 
@@ -73,6 +74,7 @@ const SigningScreen: React.FC = () => {
             value={password}
             onChangeText={setPassword}
             regex={passwordRegex}
+            keyboardType="number-pad"
             errorMessage="Please enter password"
             leftIcon={require("../../../assets/Left Content.png")} // Replace with your local icon
             RightCloseIcon={require("../../../assets/eye-off.png")}
