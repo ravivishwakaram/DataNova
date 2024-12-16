@@ -23,9 +23,9 @@ const AccountVerifyScreen: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, marginHorizontal: 36 }}>
+    <View style={styles.container}>
       <TouchableOpacity
-        style={{ marginTop: 96, marginBottom: 36 }}
+        style={styles.goBackView}
         onPress={() => navigation.goBack()}
       >
         <Image
@@ -35,7 +35,7 @@ const AccountVerifyScreen: React.FC = () => {
           source={require("../../../assets/arrow-left.png")}
         />
       </TouchableOpacity>
-      <View style={{ marginBottom: 39 }}>
+      <View style={styles.accountView}>
         <Text style={styles.letsFindYour}>Let’s find your account</Text>
         <Text style={styles.enterYourEmail}>
           Enter your email address below to find your flowlogic account.
@@ -62,6 +62,8 @@ const AccountVerifyScreen: React.FC = () => {
   );
 };
 const styles = StyleSheet.create({
+  container: { flex: 1, marginHorizontal: 36 },
+  accountView: { marginBottom: 39 },
   letsFindYour: {
     alignSelf: "stretch",
     fontSize: 24,
@@ -73,6 +75,10 @@ const styles = StyleSheet.create({
     textAlign: "left",
     display: "flex",
     alignItems: "center",
+  },
+  goBackView: {
+    marginTop: 96,
+    marginBottom: 36,
   },
   button: {
     shadowOffset: {

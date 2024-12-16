@@ -8,9 +8,9 @@ import {
   Alert,
 } from "react-native";
 import CustomTextInput from "../customTextInput/CustomTextInput";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import Button from "../button/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -23,9 +23,13 @@ const SigningScreen: React.FC = () => {
   const storedPassword = useSelector((state: RootState) => state.auth.password);
   const navigation = useNavigation();
 
-
   const handleLogin = () => {
-    if (emailRegex.test(email) && passwordRegex.test(password) && (email === storedEmail && password === storedPassword)) {
+    if (
+      emailRegex.test(email) &&
+      passwordRegex.test(password) &&
+      email === storedEmail &&
+      password === storedPassword
+    ) {
       console.log("TwoFactorAuthentication", email, password);
       navigation.navigate("TwoFactorAuthentication");
       Alert.alert("Authentication successful!");
@@ -35,9 +39,9 @@ const SigningScreen: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, marginHorizontal: 36 }}>
+    <View style={styles.mainContainer}>
       <TouchableOpacity
-        style={{ marginTop: 96, marginBottom: 36 }}
+        style={styles.goBackView}
         onPress={() => navigation.goBack()}
       >
         <Image
@@ -47,7 +51,7 @@ const SigningScreen: React.FC = () => {
           source={require("../../../assets/arrow-left.png")}
         />
       </TouchableOpacity>
-      <View style={{ marginBottom: 39 }}>
+      <View style={styles.welcomeView}>
         <Text style={styles.letsFindYour}>Welcome Back!</Text>
         <Text style={styles.enterYourEmail}>Sign into your account below</Text>
       </View>
@@ -66,7 +70,7 @@ const SigningScreen: React.FC = () => {
         />
       </View>
 
-      <View style={{ marginTop: 24 }}>
+      <View style={styles.passwordView}>
         <View>
           <Text style={styles.label}>Password</Text>
           <CustomTextInput
@@ -82,20 +86,7 @@ const SigningScreen: React.FC = () => {
             isPasswordField
           />
 
-          {/* <CustomTextInput
-          placeholder=""
-          value={isText}
-          onChangeText={setText}
-          regex={''}
-          errorMessage="Please enter password"
-          leftIcon={null} // Replace with your local icon
-          RightCloseIcon={''}
-          RightOpenIcon={''}
-        /> */}
-
-          <TouchableOpacity
-            style={{ alignItems: "flex-end", justifyContent: "flex-end" }}
-          >
+          <TouchableOpacity style={styles.forgotView}>
             <Text style={styles.forgotPassword}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>
@@ -105,19 +96,13 @@ const SigningScreen: React.FC = () => {
         title="Continue"
         onPress={() => handleLogin()}
       />
-      <View
-        style={{
-          flexDirection: "row",
-          marginVertical: 24,
-          alignItems: "center",
-        }}
-      >
+      <View style={styles.signView}>
         <View style={styles.line}></View>
 
         <Text style={styles.orSignIn}>{`Or sign in with `}</Text>
         <View style={styles.line}></View>
       </View>
-      <TouchableOpacity style={{ marginVertical: 24, alignItems: "center" }}>
+      <TouchableOpacity style={styles.buttonView}>
         <Image
           resizeMode="contain"
           width={26}
@@ -129,6 +114,19 @@ const SigningScreen: React.FC = () => {
   );
 };
 const styles = StyleSheet.create({
+  mainContainer: { flex: 1, marginHorizontal: 36 },
+  forgotView: { alignItems: "flex-end", justifyContent: "flex-end" },
+  signView: {
+    flexDirection: "row",
+    marginVertical: 24,
+    alignItems: "center",
+  },
+  goBackView: {
+    marginTop: 96,
+    marginBottom: 36,
+  },
+  passwordView: { marginTop: 24 },
+  welcomeView: { marginBottom: 39 },
   line: {
     flex: 0.5,
     height: 1, // Line height
@@ -147,6 +145,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
   },
+  buttonView: { marginVertical: 24, alignItems: "center" },
   button: {
     shadowOffset: {
       width: 0,

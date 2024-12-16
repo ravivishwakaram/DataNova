@@ -60,9 +60,9 @@ const TwoFactorAuthenticationScreen: React.FC = () => {
   };
 
   return (
-    <View style={{ flex: 1, marginHorizontal: 36 }}>
+    <View style={styles.mainContainer}>
       <TouchableOpacity
-        style={{ marginTop: 96, marginBottom: 36 }}
+        style={styles.goBackView}
         onPress={() => navigation.goBack()}
       >
         <Image
@@ -111,15 +111,13 @@ const TwoFactorAuthenticationScreen: React.FC = () => {
           {errorMessage ? (
             <Text style={styles.errorText}>{errorMessage}</Text>
           ) : null}
-
-          
         </View>
         <TouchableOpacity style={styles.didNotReceiveContainer}>
-        <Text style={styles.didNotReceive}>{`Did not receive a code? `}</Text>
-        <Text style={styles.resend}> {"Resend "}</Text>
-      </TouchableOpacity> 
+          <Text style={styles.didNotReceive}>{`Did not receive a code? `}</Text>
+          <Text style={styles.resend}> {"Resend "}</Text>
+        </TouchableOpacity>
       </View>
- 
+
       <Button style={styles.button} title="Continue" onPress={() => ""} />
     </View>
   );
@@ -127,10 +125,10 @@ const TwoFactorAuthenticationScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:36,
-  
-
+    marginTop: 36,
   },
+  goBackView: { marginTop: 96, marginBottom: 36 },
+  mainContainer: { flex: 1, marginHorizontal: 36 },
   inputContainer: {
     flexDirection: "row",
   },
@@ -176,7 +174,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     flexDirection: "row",
-    marginVertical:36
+    marginVertical: 36,
   },
 
   twoFactorAuthentication: {
@@ -202,7 +200,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     display: "flex",
     alignItems: "center",
-    marginTop:6
+    marginTop: 6,
   },
 
   button: {

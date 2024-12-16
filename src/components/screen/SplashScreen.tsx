@@ -14,7 +14,6 @@ const SplashScreen: React.FC = () => {
 
   return (
     <View style={styles.splashScreen}>
-           
       <Image
         style={styles.Icon}
         resizeMode="contain"
